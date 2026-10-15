@@ -8,7 +8,15 @@
     <ul>
         {% for tache in taches %}
             <li>
-                <strong>{{ tache.titre }}</strong>
+                <strong {% if tache.terminee %}style="text-decoration: line-through;"{% endif %}>
+                    {{ tache.titre }}
+                </strong>
+
+                {% if not tache.terminee %}
+                    <a href="{{ path('app_tache_terminer', {'id': tache.id}) }}">
+                        Terminer cette tâche
+                    </a>
+                {% endif %}
 
                 {% if tache.terminee %}
                     - Terminée
